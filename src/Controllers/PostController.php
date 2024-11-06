@@ -10,15 +10,16 @@ class PostController
     // Método para crear un nuevo post
     public function createPost($request)
     {
-        if (!isset($request['title'], $request['content'], $request['userid'])) {
-            return Response::json(400, "Datos incompletos para crear un post.");
+        if (!isset($request['title'], $request['content'], $request['userid']) || $request['userid'] == 0) {
+            return Response::json(400, "Datos incompletos o el usuario no está logueado.");
         }
-
+    
         $post = new Post();
         $result = $post->createPost($request['title'], $request['content'], $request['userid']);
-
+    
         return $result ? Response::json(201, "Post creado exitosamente.", $result) : Response::json(400, "Error al crear post.");
     }
+    
 
     // Método para obtener un post por ID
     public function getPostById($id)

@@ -47,10 +47,16 @@ class Post
     // Método para obtener todos los posts
     public function getAllPosts()
     {
-        $query = "SELECT * FROM " . $this->table;
+        $query = "
+        SELECT posts.id, posts.title, posts.content, posts.created_at, users.name FROM " . $this->table . " AS posts
+        LEFT JOIN users ON posts.userid = users.id
+        ORDER BY posts.id DESC
+    ";
+
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 }
