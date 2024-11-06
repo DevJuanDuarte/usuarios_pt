@@ -7,7 +7,6 @@ use App\Helpers\Response;
 
 class AuthController
 {
-
   public function listUsers()
   {
     $user = new User();
@@ -15,7 +14,6 @@ class AuthController
 
     return Response::json(200, "Lista de usuarios", $users);
   }
-
 
   public function register($request)
   {
@@ -27,10 +25,12 @@ class AuthController
     $user = new User();
     $result = $user->register($request['name'], $request['email'], $request['password']);
 
-    return $result ? Response::json(201, "Usuario registrado exitosamente.", $result) : Response::json(400, "Error al registrar usuario.", $result);
+    if ($result === false) {
+      return Response::json(400, "El correo electrónico ya está registrado.");
+    }
+
+    return Response::json(201, "Usuario registrado exitosamente.", $result);
   }
-
-
 
   public function login($request)
   {
