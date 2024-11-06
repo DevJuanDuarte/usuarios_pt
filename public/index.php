@@ -30,20 +30,20 @@ $postController = new PostController();
 
 if ($method === 'POST' && $requestUri === '/api/register') {
     $data = json_decode(file_get_contents("php://input"), true);
-    echo $authController->register($data);
+    echo json_encode($authController->register($data));
 } elseif ($method === 'POST' && $requestUri === '/api/login') {
     $data = json_decode(file_get_contents("php://input"), true);
-    echo $authController->login($data);
+    echo json_encode($authController->login($data));
 } elseif ($method === 'GET' && $requestUri === '/api/users') {
-    echo $authController->listUsers();
+    echo json_encode($authController->listUsers());
 } elseif ($method === 'POST' && $requestUri === '/api/posts') {
     $data = json_decode(file_get_contents("php://input"), true);
-    echo $postController->createPost($data);
+    echo json_encode($postController->createPost($data));
 } elseif ($method === 'GET' && preg_match('/\/api\/post\/(\d+)/', $requestUri, $matches)) {
     $id = $matches[1];
-    echo $postController->getPostById($id);
+    echo json_encode($postController->getPostById($id));
 } elseif ($method === 'GET' && $requestUri === '/api/posts') {
-    echo $postController->listAllPosts();
+    echo json_encode($postController->listAllPosts());
 } else {
-    echo Response::json(404, "Endpoint no encontrado.");
+    echo json_encode(Response::json(404, "Endpoint no encontrado."));
 }
