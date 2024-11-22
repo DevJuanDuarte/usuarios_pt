@@ -1,1 +1,1 @@
-{"version":1,"defects":{"AuthTest::testRegister":3,"AuthTest::testLogin":3,"AuthTest::testRegisterWithExistingEmail":4},"times":{"AuthTest::testRegister":0.076,"AuthTest::testLogin":0.102,"AuthTest::testRegisterWithExistingEmail":0.044}}
+{"version":1,"defects":{"AuthTest::testLogin":4,"AuthTest::testRegister":3},"times":{"AuthTest::testRegister":0.081,"AuthTest::testLogin":0.086,"AuthTest::testRegisterWithExistingEmail":0.04}}
